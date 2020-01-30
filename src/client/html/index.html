@@ -9,15 +9,26 @@
     <body>
 
         <header>
-
+              <img id=header alt="Time for Travel">
         </header>
 
-        <main>
-
+        <main id=body>
+          <div class="results">
+          </div>
+          <div class="trip label">What is your Destination? &nbsp
+            <form  onsubmit="return Client.hndlDestinationSubmit(event)">
+              <div><input type="text" id="destination" required></div>
+              <div class="label dates">Dates:&nbsp
+                <input type="date" id="start" min="2020-01-01" required></div>
+                <div class="label dates">&nbsp&nbspto&nbsp&nbsp<input type="date" id="end" min="2020-01-01" required></div>
+              <input class="button" type="submit" value="Submit" onclick="return Client.hndlDestinationSubmit(event)" onsubmit="return Client.hndlDestinationSubmit(event)">
+            </form>
+          </div>
         </main>
 
         <footer>
-
+            <p>Information from
+            </p>
         </footer>
 
     </body>

@@ -1,0 +1,88 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  background: url('../image/background.png');
+  margin: 0px;
+  // padding: 5px;
+  font: 100% $font-stack;
+  color: $primary-color;
+  text-align: center;
+  font-weight: bold;
+}
+
+header {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+img {
+width: 100%;
+height: auto;
+}
+
+input {
+  background: #B1D7FF;
+  color: black;
+  padding: 3px;
+  margin: 5px;
+}
+
+.button {
+  background: lightSalmon;
+  color: black;
+  padding: 5px 20px 5px 20px;
+  font-weight: bold;
+}
+
+.dates {
+  display: inline-block;
+}
+
+.label {
+  font-weight: bold;
+}
+
+input:hover {
+  background: #C7E1FC;
+}
+
+button {
+  background: #F3D878;
+  margin: 3px;
+  padding: 5px;
+  font: 1.3em;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+button:hover {
+
+}
+
+.trip {
+  position: relative;
+  // display: inline;
+  opacity: 0.8;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  margin: -18% 10px auto 10px;
+  background-color: white;
+  // margin-top: -20px;
+  // margin: -20px, 10px, 10px, 10px;
+  padding: 8px 10px 10px 10px;
+  // height: 50vh;
+  // line-height: 2em;
+
+}
+
+section {
+  display: inline-block;
+}
+
+footer {
+  padding: 20px;
+  position: relative;
+  margin-top: -25px;
+  color: white;
+}
