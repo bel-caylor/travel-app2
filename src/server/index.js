@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const testServerData = require('./testServer.js')
+const fetch = require("node-fetch");
 
 // Setup port
 const port = 3000;
@@ -22,19 +24,20 @@ app.use(express.static('./dist'));
 
 //Routes
 //Test Route
-app.get('/test', (req, res) => {
-  res.send('Server working!');
+app.get('/test', function (req, res) {
+    console.log('Server Test');
+    res.send(testServerData);
 });
 
 app.get('/', (req, res) => {
   res.status(200).send('./dist/index.html');
 })
 
-app.get('/geonames/:destination', async () => {
-  const URL = 'http://api.geonames.org/postalCodeSearch?placename=';
+app.get('/geoNames/:destination', async (req, res) => {
+  const URL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
   console.log('Started GeoNames');
   console.log(req.params.destination);
-  const res = await fetch(URL + req.params.destination + '&username=bcaylor');
+  res = await fetch(URL + req.params.destination + '&username=bcaylor');
   try {
     const data = await res.json();
     console.log(data);
