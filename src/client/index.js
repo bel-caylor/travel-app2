@@ -1,4 +1,5 @@
 const port = 'http://localhost:3000';
+import './styles/form.scss'
 import './styles/style.scss'
 import './styles/resets.scss'
 import './image/background.png'
