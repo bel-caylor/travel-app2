@@ -4,7 +4,8 @@ const body = document.getElementById('body')
 let tripArray = [];
 const tripID = "trip" + tripCount;
 const testGeoNamesData = require('./sampleGeoNamesData.js');
-// require("regenerator-runtime");
+require("regenerator-runtime");
+const fetch = require("node-fetch");
 
 function createDestDropDown(geoNames, formDestination) {
   let placeNames = [];
@@ -42,14 +43,15 @@ function createDestDropDown(geoNames, formDestination) {
 };
 
 function hndlDestinationSubmit (event) {
-  let formDestination = document.getElementById('destination').value;
-  // const geoNames = getGeoNames(formDestination);
+  let formDestination = document.getElementById('formDest').value;
+  const geoNames = getGeoNames(formDestination);
+    //****TRYING TO GET .THEN TO WORK****
     // .then(() => {
     //   console.log(geoNames);
-    //   // createDestDropDown(geoNames);
+    //   createDestDropDown(testGeoNamesData, formDestination);
     //   }
     // )
-  createDestDropDown(testGeoNamesData, formDestination);
+
 
   // let formStart = document.getElementById('start').value;
   // let formEnd = document.getElementById('end').value;
@@ -57,40 +59,16 @@ function hndlDestinationSubmit (event) {
 
   //Hide Input form
 
-  //Create Location Dropdown
-
-
-
-
-  // .then(() => {
-  //   console.log(geoNames);
-  //   // createDestDropDown(geoNames);
-  //   }
-  // )
 
 };
 
 const getGeoNames = async (Dest) => {
   const res = await fetch(`${port}/geonames/${Dest}`);
-  // const res = await fetch(`${port}/geoNames/Marion`);
+  //***TRYING TO GET TRY to work after ASYNC call****
   try {
     const data = await res.json();
-    return data;
-  }
-  catch(error) {
-    console.log("error", error);
-  }
-};
-
-const testgetGeoNames = async (Dest) => {
-  let URL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
-  URL += Dest + '&username=bcaylor';
-  // const User =
-  // const res = await fetch(`URL + Dest + '&username=bcaylor'`);
-  const res = await fetch(URL);
-    // const res = await fetch(`${port}/geoNames/Marion`);
-  try {
-    const data = await res.json();
+    //Need to change after I figure out .then
+    createDestDropDown(data, formDestination);
     return data;
   }
   catch(error) {
@@ -99,11 +77,11 @@ const testgetGeoNames = async (Dest) => {
 };
 
 function toggleElement(ID) {
-  var x = document.getElementById(ID);
-  if (x.style.display === "none") {
-    x.style.display = "block";
+  let elementID = document.getElementById(ID);
+  if (elementID.style.display === "none") {
+    elementID.style.display = "block";
   } else {
-    x.style.display = "none";
+    elementID.style.display = "none";
   }
 };
 
