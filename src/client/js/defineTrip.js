@@ -88,7 +88,13 @@ function hndlDestDropDown (event) {
 function hndlDestinationSubmit (event) {
   event.preventDefault()
   let formDestination = document.getElementById('formDest').value;
-  createDestDropDown(testGeoNamesData, 'Wagner')
+  // createDestDropDown(testGeoNamesData, 'Wagner')
+  const geoNames = getGeoNames(formDestination)
+    .then(() => {
+      console.log(geoNames);
+      createDestDropDown(geoNames, formDestination);
+    }
+  )
 };
 
 //TESTING ASYNC ON client side.
@@ -119,12 +125,12 @@ function hndlDestinationSubmit (event) {
 
 
 const getGeoNames = async (Dest) => {
-  const res = await fetch(`${port}/geonames/${Dest}`);
-  //***TRYING TO GET TRY to work after ASYNC call****
+  const res = await fetch(`${port}/geonames/${Dest}`)
   try {
     const data = await res.json();
+    console.log(data);
     //Need to change after I figure out .then
-    createDestDropDown(data, formDestination);
+    // createDestDropDown(data, formDestination);
     return data;
   }
   catch(error) {
