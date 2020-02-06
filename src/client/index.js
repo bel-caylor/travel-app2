@@ -3,7 +3,8 @@ import './styles/form.scss'
 import './styles/style.scss'
 import './styles/resets.scss'
 import './image/background.png'
-import {hndlDestinationSubmit} from './js/defineTrip.js';
+import {hndlDestinationSubmit, hndlDestDropDown} from './js/defineTrip.js';
+import {hndlDateSubmit} from './js/defineTripDates';
 // const hndlDestinationSubmit = require('./js/defineTrip.js');
 // const defineTrip = require('./js/defineTrip.js');
 
@@ -28,5 +29,5 @@ testServer();
 
 
 export {
-  hndlDestinationSubmit, port
+  hndlDestinationSubmit, hndlDestDropDown, port, hndlDateSubmit
 };

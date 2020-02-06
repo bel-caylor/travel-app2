@@ -1,14 +1,15 @@
 import {port} from '../index.js';
-let tripCount = 1;
+import {tripDates} from './defineTripDates.js';
 const body = document.getElementById('body')
 let tripArray = [];
-const tripID = "trip" + tripCount;
+// const tripID = "trip" + tripCount;
 const testGeoNamesData = require('./sampleGeoNamesData.js');
 require("regenerator-runtime");
 const fetch = require("node-fetch");
+let placeNames = [];
 
 function createDestDropDown(geoNames, formDestination) {
-  let placeNames = [];
+
   // console.log(placeNames.length);
   const location = geoNames.postalCodes;
   console.log(location);
@@ -45,7 +46,7 @@ function createDestDropDown(geoNames, formDestination) {
   toggleElement('destination');
   //If there is multiple locations toggle dropdown form else toggle dates form.
   if (placeNames.length > 1) {
-    let dropDownHTML = `<select>`
+    let dropDownHTML = `<select id="dropdownID">`
     for (const loc of placeNames) {
       dropDownHTML += `<option value=\"${loc.postalCode}\">${loc.placeName}, ${loc.adminName1}, ${loc.countryCode}</option>`
 
@@ -59,6 +60,29 @@ function createDestDropDown(geoNames, formDestination) {
   }else{
     toggleElement('dates');
   }
+};
+
+function hndlDestDropDown (event) {
+  event.preventDefault()
+  //Find selected lcoation in placeNames
+  let postalCode = document.getElementById('dropdownID').value;
+  for (const placeName of placeNames) {
+    if (postalCode === placeName.postalCode) {
+      let newEntry = {
+        postalCode: postalCode,
+        placeName: placeName.placeName,
+        adminName1: placeName.adminName1,
+        countryCode: placeName.countryCode,
+        lng: placeName.lng,
+        lat: placeName.lat
+      };
+      tripArray.push(newEntry);
+      console.log(tripArray);
+      // break;
+    };
+    toggleElement('destDropDown');
+    toggleElement('dates');
+  };
 };
 
 function hndlDestinationSubmit (event) {
@@ -136,4 +160,4 @@ const testgetGeoNames = async (Dest) => {
   };
 
 // module.exports = hndlDestinationSubmit
-export { hndlDestinationSubmit };
+export { hndlDestinationSubmit, hndlDestDropDown, toggleElement, tripArray };
