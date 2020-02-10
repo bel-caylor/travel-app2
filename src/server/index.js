@@ -1,9 +1,12 @@
 // Global variables
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const testServerData = require('./testServer.js')
 const fetch = require("node-fetch");
+let weatherData = [];
 
 // Setup port
 const port = 3000;
@@ -65,4 +68,24 @@ app.get('/geoNames/:destination', async (req, res) => {
     console.log("error", error)
   }
 
+});
+
+app.get('/getWeather/:latitude/:longitude/:startDate/:endDate', async (req,res) => {
+  const URL = 'https://api.darksky.net/forecast/';
+  const key = process.env.DARK_SKY_API_KEY;
+  // const start = 
+  console.log('Started getWeather');
+
+//loop through travel dates
+
+    const response =  await fetch(URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp)
+    try {
+      const data = await response.json()
+      console.log(data)
+      // return data;
+      res.send(data)
+    }
+    catch(error) {
+      console.log("error", error)
+    }
 });
