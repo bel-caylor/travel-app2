@@ -1,10 +1,14 @@
 import {toggleElement, tripArray} from './defineTrip.js';
+import {getWeather} from './getWeather.js';
 
 function hndlDateSubmit (event) {
   event.preventDefault();
-  const start = document.getElementById('startDate').value;
-  const end = document.getElementById('endDate').value
-  const numDays = numberOfDays(start, end);
+  let start = document.getElementById('startDate').value;
+  let end = document.getElementById('endDate').value
+  let tripLength = timeDiff(start, end);
+  let timeTill = timeDiff(Date.now(), start);
+  start = new Date(start);
+  end = new Date(end);
   let arrayLoc = tripArray.length - 1
   let addDates = {
     postalCode: tripArray[arrayLoc].postalCode,
@@ -15,19 +19,20 @@ function hndlDateSubmit (event) {
     lat: tripArray[arrayLoc].lat,
     start: start,
     end: end,
-    numDays: numDays,
+    numDays: tripLength,
   };
   tripArray.pop();
   tripArray.push(addDates);
   console.log(addDates);
+  getWeather(tripArray, arrayLoc);
 };
 
 
-function numberOfDays(start, end) {
+function timeDiff(start, end) {
   var startDate = new Date(start);
   var endDate = new Date(end);
   const diff = endDate.getTime() - startDate.getTime();
   return diff/(1000*60*60*24);  //(1000*60*60*24) milliseconds in a day
 };
 
-export { hndlDateSubmit, numberOfDays };
+export { hndlDateSubmit, timeDiff };

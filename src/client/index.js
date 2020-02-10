@@ -3,6 +3,7 @@ import './styles/form.scss'
 import './styles/style.scss'
 import './styles/resets.scss'
 import './image/background.png'
+import './image/samplePhoto.png'
 import {hndlDestinationSubmit, hndlDestDropDown} from './js/defineTrip.js';
 import {hndlDateSubmit} from './js/defineTripDates';
 // const hndlDestinationSubmit = require('./js/defineTrip.js');

@@ -70,22 +70,34 @@ app.get('/geoNames/:destination', async (req, res) => {
 
 });
 
-app.get('/getWeather/:latitude/:longitude/:startDate/:endDate', async (req,res) => {
+app.get('/getWeather/:latitude/:longitude/:startDate/:tripLength', async (req,res) => {
   const URL = 'https://api.darksky.net/forecast/';
   const key = process.env.DARK_SKY_API_KEY;
-  // const start = 
+  // const start =
   console.log('Started getWeather');
-
+  let timestamp = new Date(req.params.startDate).getTime()/1000.0;
 //loop through travel dates
-
-    const response =  await fetch(URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp)
+  for(var i = 0; i < req.params.tripLength; i++) {
+    // const darkSkyURL = URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp + "?exclude=currently,minutely,hourly,flags,alerts";
+    // console.log(darkSkyURL);
+    const response =  await fetch(URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp + "?exclude=currently,minutely,hourly,flags,alerts")
     try {
       const data = await response.json()
       console.log(data)
-      // return data;
-      res.send(data)
+      let dataPoint = {
+        time: timestamp,
+        summary: data.daily.data[0].summary,
+        icon: data.daily.data[0].icon,
+        temperatureHigh: data.daily.data[0].temperatureHigh,
+        temperatureLow: data.daily.data[0].temperatureLow
+      };
+      weatherData.push(dataPoint);
+      timestamp += (60*60*24);
     }
     catch(error) {
       console.log("error", error)
     }
+  };
+  console.log(weatherData)
+  res.send(weatherData)
 });
