@@ -7,9 +7,30 @@ const testGeoNamesData = require('./sampleGeoNamesData.js');
 require("regenerator-runtime");
 const fetch = require("node-fetch");
 let placeNames = [];
+let geoNames = [];
 
-function createDestDropDown(geoNames, formDestination) {
+function hndlDestinationSubmit (event) {
+  event.preventDefault()
+  let formDestination = document.getElementById('formDest').value;
+  getGeoNames(formDestination)
+    .then(() => {
+      // console.log(geoNames);
+      createDestDropDown(formDestination);
+    }
+  )
+};
 
+const getGeoNames = async (Dest) => {
+  const res = await fetch(`${port}/geonames/${Dest}`)
+  try {
+    geoNames = await res.json();
+  }
+  catch(error) {
+    console.log("error", error);
+  }
+};
+
+function createDestDropDown(formDestination) {
   // console.log(placeNames.length);
   const location = geoNames.postalCodes;
   console.log(location);
@@ -29,8 +50,8 @@ function createDestDropDown(geoNames, formDestination) {
         placeNames.push(newEntry);
       }else{
         for (const place of placeNames) {
-          if (location.adminName1 === place.adminName1) {
-            continue;
+          if (postalCodes.adminName1 === place.adminName1) {
+            break;
           }else{
             placeNames.push(newEntry);
             console.log(placeNames);
@@ -42,6 +63,7 @@ function createDestDropDown(geoNames, formDestination) {
 
   });
   console.log(placeNames);
+
 //Update UI
   toggleElement('destination');
   //If there is multiple locations toggle dropdown form else toggle dates form.
@@ -49,11 +71,7 @@ function createDestDropDown(geoNames, formDestination) {
     let dropDownHTML = `<select id="dropdownID">`
     for (const loc of placeNames) {
       dropDownHTML += `<option value=\"${loc.postalCode}\">${loc.placeName}, ${loc.adminName1}, ${loc.countryCode}</option>`
-
     }
-
-    // placeNames.forEach(
-    // );
     dropDownHTML += `</select>`;
     document.getElementById('destDropDown').insertAdjacentHTML('afterbegin', dropDownHTML);
     toggleElement('destDropDown');
@@ -61,6 +79,7 @@ function createDestDropDown(geoNames, formDestination) {
     toggleElement('dates');
   }
 };
+
 
 function hndlDestDropDown (event) {
   event.preventDefault()
@@ -78,64 +97,10 @@ function hndlDestDropDown (event) {
       };
       tripArray.push(newEntry);
       console.log(tripArray);
-      // break;
     };
-    toggleElement('destDropDown');
-    toggleElement('dates');
   };
-};
-
-function hndlDestinationSubmit (event) {
-  event.preventDefault()
-  let formDestination = document.getElementById('formDest').value;
-  // createDestDropDown(testGeoNamesData, 'Wagner')
-  const geoNames = getGeoNames(formDestination)
-    .then(() => {
-      console.log(geoNames);
-      createDestDropDown(geoNames, formDestination);
-    }
-  )
-};
-
-//TESTING ASYNC ON client side.
-// const data = testgetGeoNames(formDestination)
-// .then(() => {
-//   createDestDropDown(data, formDestination)
-//   }
-// );
-
-
-//****TRYING TO GET .THEN TO WORK****
-    // const geoNames = getGeoNames(formDestination);
-
-    // .then(() => {
-    //   console.log(geoNames);
-    //   createDestDropDown(testGeoNamesData, formDestination);
-    //   }
-    // )
-
-
-  // let formStart = document.getElementById('start').value;
-  // let formEnd = document.getElementById('end').value;
-  // console.log(formDestination + ' ' + formStart + ' ' + formEnd);
-
-  //Hide Input form
-
-
-
-
-const getGeoNames = async (Dest) => {
-  const res = await fetch(`${port}/geonames/${Dest}`)
-  try {
-    const data = await res.json();
-    console.log(data);
-    //Need to change after I figure out .then
-    // createDestDropDown(data, formDestination);
-    return data;
-  }
-  catch(error) {
-    console.log("error", error);
-  }
+  toggleElement('destDropDown');
+  toggleElement('dates');
 };
 
 function toggleElement(ID) {
@@ -150,7 +115,6 @@ function toggleElement(ID) {
 const testgetGeoNames = async (Dest) => {
   let URL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
   URL += Dest + '&username=bcaylor';
-  // const User =
   // const res = await fetch(`URL + Dest + '&username=bcaylor'`);
   const res = await fetch(URL);
     // const res = await fetch(`${port}/geoNames/Marion`);
@@ -165,5 +129,4 @@ const testgetGeoNames = async (Dest) => {
     }
   };
 
-// module.exports = hndlDestinationSubmit
 export { hndlDestinationSubmit, hndlDestDropDown, toggleElement, tripArray };

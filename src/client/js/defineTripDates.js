@@ -7,7 +7,7 @@ function hndlDateSubmit (event) {
   const numDays = numberOfDays(start, end);
   let arrayLoc = tripArray.length - 1
   let addDates = {
-    postalCode: tripArray[arrayLoc].postalCode.value,
+    postalCode: tripArray[arrayLoc].postalCode,
     placeName: tripArray[arrayLoc].placeName,
     adminName1: tripArray[arrayLoc].adminName1,
     countryCode: tripArray[arrayLoc].countryCode,
@@ -17,8 +17,9 @@ function hndlDateSubmit (event) {
     end: end,
     numDays: numDays,
   };
-
+  tripArray.pop();
   tripArray.push(addDates);
+  console.log(addDates);
 };
 
 
