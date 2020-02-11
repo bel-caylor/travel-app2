@@ -77,14 +77,14 @@ app.get('/getWeather/:latitude/:longitude/:startDate/:tripLength', async (req,re
   console.log('Started getWeather');
   let timestamp = new Date(req.params.startDate).getTime()/1000.0;
 //loop through travel dates
-  console.log(req.params.tripLength);
+  // console.log(req.params.tripLength);
   for(var i = 0; i < req.params.tripLength; i++) {
     // const darkSkyURL = URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp + "?exclude=currently,minutely,hourly,flags,alerts";
     // console.log(darkSkyURL);
     const response =  await fetch(URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp + "?exclude=currently,minutely,hourly,flags,alerts")
     try {
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       let dataPoint = {
         time: timestamp,
         summary: data.daily.data[0].summary,
@@ -101,4 +101,18 @@ app.get('/getWeather/:latitude/:longitude/:startDate/:tripLength', async (req,re
   };
   console.log(weatherData)
   res.send(weatherData)
+});
+
+app.get('/getPhoto/:placeName/:state/:country', async (req,res) => {
+  const URL = 'https://pixabay.com/api/?key=';
+  const key = process.env.PIXABAY_API_KEY;
+  const response =  await fetch(URL + key + "&q=" + req.params.placeName + "+" + req.params.state + "&image_type=photo&category=travel")
+  try {
+    const data = await response.json()
+    // console.log(data)
+    res.send(data)
+  }
+  catch(error) {
+    console.log("error", error)
+  }
 });

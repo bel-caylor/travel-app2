@@ -8,6 +8,7 @@ require("regenerator-runtime");
 const fetch = require("node-fetch");
 let placeNames = [];
 let geoNames = [];
+let httpPhoto = "";
 
 function hndlDestinationSubmit (event) {
   event.preventDefault()
@@ -90,22 +91,38 @@ function hndlDestDropDown (event) {
   event.preventDefault()
   toggleElement('destDropDown');
 //Find selected lcoation in placeNames
-  let postalCode = document.getElementById('dropdownID').value;
-  for (const placeName of placeNames) {
-    if (postalCode === placeName.postalCode) {
-      let newEntry = {
-        postalCode: postalCode,
-        placeName: placeName.placeName,
-        adminName1: placeName.adminName1,
-        countryCode: placeName.countryCode,
-        lng: placeName.lng,
-        lat: placeName.lat
+    let postalCode = document.getElementById('dropdownID').value;
+    for (const placeName of placeNames) {
+      if (postalCode === placeName.postalCode) {
+        getPhoto(placeName.placeName, placeName.adminName1, placeName.countryCode)
+          .then(() => {
+            let newEntry = {
+              postalCode: postalCode,
+              placeName: placeName.placeName,
+              adminName1: placeName.adminName1,
+              countryCode: placeName.countryCode,
+              lng: placeName.lng,
+              lat: placeName.lat,
+              photo: httpPhoto
+            };
+            tripArray.push(newEntry);
+            console.log(tripArray);
+          })
       };
-      tripArray.push(newEntry);
-      console.log(tripArray);
     };
-  };
-  toggleElement('dates');
+    toggleElement('dates');
+};
+
+const getPhoto = async (place, state, country) => {
+  const res = await fetch(`${port}/getPhoto/${place}/${state}/${country}`)
+  try {
+    let data = await res.json();
+    console.log(data.hits[0].webformatURL)
+    httpPhoto = data.hits[0].webformatURL;
+  }
+  catch(error) {
+    console.log("error", error);
+  }
 };
 
 function toggleElement(ID) {

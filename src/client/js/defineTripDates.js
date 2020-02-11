@@ -18,6 +18,7 @@ function hndlDateSubmit (event) {
     countryCode: tripArray[arrayLoc].countryCode,
     lng: tripArray[arrayLoc].lng,
     lat: tripArray[arrayLoc].lat,
+    photo: tripArray[arrayLoc].photo,
     start: start,
     end: end,
     numDays: tripLength,

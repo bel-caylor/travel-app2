@@ -28,14 +28,6 @@ const getWeather = async (tripArray, arrayLoc) => {
   }
 };
 
-// function cnvtDateToUnixTime(time) {
-//
-// };
-//
-// function cnvtUnixTimeToDate(timestamp) {
-//
-// };
-
 function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD section
   let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"results trip label\">`
@@ -53,7 +45,7 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
   let start = tripArray.start.toString()
   let end = tripArray.end.toString()
   let startIn = Math.ceil(timeDiff(Date.now(), tripArray.start))
-  document.getElementById(`img${arrayLoc}`).src = 'https://pixabay.com/get/54e9d74a4357b108f5d0846096293377103ed6e4504c704c7d2e7fd0954acd50_1280.jpg';
+  document.getElementById(`img${arrayLoc}`).src = tripArray.photo;
   let tripSection = `<div class=\"destination\">${tripArray.placeName}, ${tripArray.adminName1}, ${tripArray.countryCode}</div>`
   tripSection += `<div class=\"travelDates\">From: ${start.slice(0,10)} to ${end.slice(0,10)}</div>`
   if (startIn > 0) {
