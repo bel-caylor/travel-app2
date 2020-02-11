@@ -14,10 +14,14 @@ function hndlDestinationSubmit (event) {
   let formDestination = document.getElementById('formDest').value;
   getGeoNames(formDestination)
     .then(() => {
-      // console.log(geoNames);
-      createDestDropDown(formDestination);
+      if (geoNames.postalCodes.length == 0) {
+        alert("Please enter a valid city.");
+      }else{
+        createDestDropDown(formDestination);
+      }
     }
   )
+  document.getElementById('formDest').value = "";
 };
 
 const getGeoNames = async (Dest) => {
@@ -31,7 +35,7 @@ const getGeoNames = async (Dest) => {
 };
 
 function createDestDropDown(formDestination) {
-  // console.log(placeNames.length);
+  toggleElement('destination');
   const location = geoNames.postalCodes;
   console.log(location);
 // Remove duplicate places and populate placeNames with unique places.
@@ -64,8 +68,9 @@ function createDestDropDown(formDestination) {
   });
   console.log(placeNames);
 
+
 //Update UI
-  toggleElement('destination');
+
   //If there is multiple locations toggle dropdown form else toggle dates form.
   if (placeNames.length > 1) {
     let dropDownHTML = `<select id="dropdownID">`
@@ -84,7 +89,7 @@ function createDestDropDown(formDestination) {
 function hndlDestDropDown (event) {
   event.preventDefault()
   toggleElement('destDropDown');
-  //Find selected lcoation in placeNames
+//Find selected lcoation in placeNames
   let postalCode = document.getElementById('dropdownID').value;
   for (const placeName of placeNames) {
     if (postalCode === placeName.postalCode) {

@@ -3,6 +3,8 @@ import {getWeather} from './getWeather.js';
 
 function hndlDateSubmit (event) {
   event.preventDefault();
+  document.getElementById('dropdownID').remove()
+  toggleElement('dates');
   let start = document.getElementById('startDate').value;
   let end = document.getElementById('endDate').value
   let tripLength = timeDiff(start, end);
@@ -23,7 +25,14 @@ function hndlDateSubmit (event) {
   tripArray.pop();
   tripArray.push(addDates);
   console.log(addDates);
-  getWeather(tripArray, arrayLoc);
+  getWeather(tripArray, arrayLoc)
+    .then (() => {
+// Clear form and toggle destination.
+      document.getElementById('startDate').value = "";
+      document.getElementById('endDate').value = "";
+      toggleElement('destination');
+      }
+    );
 };
 
 
