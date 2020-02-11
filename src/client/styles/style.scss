@@ -60,13 +60,21 @@ button:hover {
 
 }
 
+.weatherIcon {
+  opacity: 1.0
+}
+
+.icon {
+  width: 15%;
+}
+
 .trip {
   position: relative;
   // display: inline;
-  opacity: 0.8;
+  // opacity: 0.8;
   box-shadow: 1px 1px 1px black;
   border-radius: 5px;
-  margin: -18% 10px auto 10px;
+  margin: 0px 10px auto 10px;
   background-color: white;
   // margin-top: -20px;
   // margin: -20px, 10px, 10px, 10px;

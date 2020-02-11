@@ -6,7 +6,6 @@ const app = express();
 const cors = require('cors');
 const testServerData = require('./testServer.js')
 const fetch = require("node-fetch");
-let weatherData = [];
 
 // Setup port
 const port = 3000;
@@ -71,12 +70,14 @@ app.get('/geoNames/:destination', async (req, res) => {
 });
 
 app.get('/getWeather/:latitude/:longitude/:startDate/:tripLength', async (req,res) => {
+  let weatherData = [];
   const URL = 'https://api.darksky.net/forecast/';
   const key = process.env.DARK_SKY_API_KEY;
   // const start =
   console.log('Started getWeather');
   let timestamp = new Date(req.params.startDate).getTime()/1000.0;
 //loop through travel dates
+  console.log(req.params.tripLength);
   for(var i = 0; i < req.params.tripLength; i++) {
     // const darkSkyURL = URL + key + "/" + req.params.latitude + "," + req.params.longitude + ","  + timestamp + "?exclude=currently,minutely,hourly,flags,alerts";
     // console.log(darkSkyURL);

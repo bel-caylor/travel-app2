@@ -6,7 +6,6 @@ function hndlDateSubmit (event) {
   let start = document.getElementById('startDate').value;
   let end = document.getElementById('endDate').value
   let tripLength = timeDiff(start, end);
-  let timeTill = timeDiff(Date.now(), start);
   start = new Date(start);
   end = new Date(end);
   let arrayLoc = tripArray.length - 1
