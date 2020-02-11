@@ -38,20 +38,27 @@ const getWeather = async (tripArray, arrayLoc) => {
 
 function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD section
-  let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"results\">`
+  let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"results trip label\">`
   HTMLresults += `<div id=\"photo${arrayLoc}\" class=\"locationPhoto\">`
   HTMLresults += `<img id=\"img${arrayLoc}\" ></div>`
   HTMLresults += `<div id=\"tripDetails${arrayLoc}\" class=\"tripDetails\"></div>`
-  HTMLresults += `<div id=\"tripWeather${arrayLoc}\" class="weather"></div></div>`
+  HTMLresults += `<div id=\"tripWeather${arrayLoc}\" class="weather"></div>`
+  HTMLresults += `<form id=\"delTrip${arrayLoc}\" onsubmit=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\">`
+  HTMLresults += `<button id=\"deleteTrip${arrayLoc}\" type = \"submit\"  onclick=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\"> `
+  HTMLresults += `Delete Trip </button></form></div>`
+
   document.getElementById('results').insertAdjacentHTML('beforeend', HTMLresults);
 
 //ADD Trip tripDetails
-
-  let timeTill = timeDiff(Date.now(), tripArray.start);
+  let start = tripArray.start.toString()
+  let end = tripArray.end.toString()
+  let startIn = Math.ceil(timeDiff(Date.now(), tripArray.start))
   document.getElementById(`img${arrayLoc}`).src = samplePht;
   let tripSection = `<div class=\"destination\">${tripArray.placeName}, ${tripArray.adminName1}, ${tripArray.countryCode}</div>`
-  tripSection += `<div class=\"travelDates\">From: ${tripArray.start} to ${tripArray.end}</div>`
-  tripSection += `<div class=\"startIn\">Trip Start In: ${timeTill} </div>`
+  tripSection += `<div class=\"travelDates\">From: ${start.slice(0,10)} to ${end.slice(0,10)}</div>`
+  if (startIn > 0) {
+    tripSection += `<div class=\"startIn\">Trip Start In: ${startIn} Days</div>`
+  }
   document.getElementById(`tripDetails${arrayLoc}`).innerHTML = tripSection
 
 //ADD weather data
@@ -59,8 +66,8 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
   weatherData.forEach((date) => {
     let Icon = weatherIcon(date.icon);
     weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
-    weatherHTML += `<div class=\"weatherDetail\">Date: ${date.time}<br>`;
-    weatherHTML += `Summary: ${weatherData.time}<br>Temp High: ${date.temperatureHigh}<br>`;
+    weatherHTML += `<div class=\"weatherDetail\">Date: ${convertTimeStamp(date.time)}<br>`;
+    weatherHTML += `${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
     weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
   });
   weatherHTML += `</div>`;
@@ -93,6 +100,16 @@ function weatherIcon(icon) {
     case "wind":
       return "6754f0ce4d38eb582769524f8f48b403.jpg";
   };
+};
+
+function convertTimeStamp (timeStamp){
+ const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+ const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+ let date = new Date(timeStamp*1000);
+ let weekday = weekdays[date.getDay()];
+ let month = months[date.getMonth()];
+ let day = date.getDate();
+ return weekday + '-' + month +  '-' + day;
 };
 
 export { getWeather };

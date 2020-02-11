@@ -17,7 +17,8 @@ import thunderstorm from './image/weather-icons/thunderstorm.jpg'
 import wind from './image/weather-icons/wind.jpg'
 import header from './image/header-logo.jpg'
 import {hndlDestinationSubmit, hndlDestDropDown} from './js/defineTrip.js';
-import {hndlDateSubmit} from './js/defineTripDates';
+import {hndlDateSubmit} from './js/defineTripDates.js';
+import {hndlDeleteTrip} from './js/deleteTrip.js'
 // const hndlDestinationSubmit = require('./js/defineTrip.js');
 // const defineTrip = require('./js/defineTrip.js');
 
@@ -38,9 +39,6 @@ var homeImg = document.getElementById('header');
 homeImg.src = header;
 testServer();
 
-
-
-
 export {
-  hndlDestinationSubmit, hndlDestDropDown, port, hndlDateSubmit
+  hndlDestinationSubmit, hndlDestDropDown, port, hndlDateSubmit, hndlDeleteTrip
 };

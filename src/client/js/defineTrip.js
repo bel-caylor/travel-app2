@@ -83,6 +83,7 @@ function createDestDropDown(formDestination) {
 
 function hndlDestDropDown (event) {
   event.preventDefault()
+  toggleElement('destDropDown');
   //Find selected lcoation in placeNames
   let postalCode = document.getElementById('dropdownID').value;
   for (const placeName of placeNames) {
@@ -99,7 +100,6 @@ function hndlDestDropDown (event) {
       console.log(tripArray);
     };
   };
-  toggleElement('destDropDown');
   toggleElement('dates');
 };
 
