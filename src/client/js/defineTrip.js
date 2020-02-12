@@ -119,7 +119,9 @@ const getPhoto = async (place, state, country) => {
   try {
     let data = await res.json();
     console.log(data.hits[0].webformatURL)
-    httpPhoto = data.hits[0].webformatURL;
+    if (data.hits[0].webformatURL !== undefined) {
+      httpPhoto = data.hits[0].webformatURL;
+    }
   }
   catch(error) {
     console.log("error", error);
