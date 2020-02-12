@@ -19,19 +19,11 @@ import header from './image/header-logo.jpg'
 import {hndlDestinationSubmit, hndlDestDropDown} from './js/defineTrip.js';
 import {hndlDateSubmit} from './js/defineTripDates.js';
 import {hndlDeleteTrip} from './js/deleteTrip.js'
+import {testServer} from './js/testServer.js'
 // const hndlDestinationSubmit = require('./js/defineTrip.js');
 // const defineTrip = require('./js/defineTrip.js');
 
-const testServer = async () => {
-  const response = await fetch(`${port}/test`);
-  try {
-    const newData = await response.json();
-    console.log(newData);
-    return newData;
-  }catch(error) {
-    console.log("error", error);
-  }
-};
+
 
 //Setup header
 

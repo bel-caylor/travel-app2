@@ -1,5 +1,6 @@
 import {toggleElement, tripArray} from './defineTrip.js';
 import {getWeather} from './getWeather.js';
+import {timeDiff} from './timeDiff.js';
 
 function hndlDateSubmit (event) {
   event.preventDefault();
@@ -36,12 +37,4 @@ function hndlDateSubmit (event) {
     );
 };
 
-
-function timeDiff(start, end) {
-  var startDate = new Date(start);
-  var endDate = new Date(end);
-  const diff = endDate.getTime() - startDate.getTime();
-  return diff/(1000*60*60*24);  //(1000*60*60*24) milliseconds in a day
-};
-
-export { hndlDateSubmit, timeDiff };
+export { hndlDateSubmit };

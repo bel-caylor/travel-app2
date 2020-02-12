@@ -12,7 +12,8 @@ import thunderstorm from '../image/weather-icons/thunderstorm.jpg'
 import wind from '../image/weather-icons/wind.jpg'
 import {port} from '../index.js';
 import {toggleElement, tripArray} from './defineTrip.js';
-import {timeDiff} from './defineTripDates.js';
+import {timeDiff} from './timeDiff.js';
+import {convertTimeStamp} from './convertTimeStamp.js';
 // import header from '../image/header-logo.jpg'
 let weatherData = {};
 require("regenerator-runtime");
@@ -93,16 +94,6 @@ function weatherIcon(icon) {
     case "wind":
       return "6754f0ce4d38eb582769524f8f48b403.jpg";
   };
-};
-
-function convertTimeStamp (timeStamp){
- const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
- const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
- let date = new Date(timeStamp*1000);
- let weekday = weekdays[date.getDay()];
- let month = months[date.getMonth()];
- let day = date.getDate();
- return weekday + '-' + month +  '-' + day;
 };
 
 export { getWeather };

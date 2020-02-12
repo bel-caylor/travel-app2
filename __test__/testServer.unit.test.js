@@ -1,4 +1,4 @@
-import {testServer} from '../src/client/index.js';
+import {testServer} from '../src/client/js/testServer.js';
 require("regenerator-runtime");
 
 test('test Server', async () => {
