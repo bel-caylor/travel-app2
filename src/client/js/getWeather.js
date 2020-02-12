@@ -32,12 +32,12 @@ const getWeather = async (tripArray, arrayLoc) => {
 
 function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD section
-  let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"results trip label\">`
-  HTMLresults += `<div id=\"photo${arrayLoc}\" class=\"locationPhoto\">`
-  HTMLresults += `<img id=\"img${arrayLoc}\" class=\"tripImage\" ></div>`
+  let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"resultLayout results trip label\">`
+  HTMLresults += `<div id=\"photo${arrayLoc}\" class=\"locationPhoto tripImage\">`
+  HTMLresults += `<img id=\"img${arrayLoc}\"></div>`
   HTMLresults += `<div id=\"tripDetails${arrayLoc}\" class=\"tripDetails\"></div>`
   HTMLresults += `<div id=\"tripWeather${arrayLoc}\" class="weather"></div>`
-  HTMLresults += `<form id=\"delTrip${arrayLoc}\" onsubmit=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\">`
+  HTMLresults += `<form id=\"delTrip${arrayLoc}\" onsubmit=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\" class=\"deleteButton\">`
   HTMLresults += `<button id=\"deleteTrip${arrayLoc}\" type = \"submit\"  onclick=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\"> `
   HTMLresults += `Delete Trip </button></form></div>`
 
@@ -64,19 +64,20 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
 
 //ADD forecastweather data
   if (startIn >= 0 && startIn < 8) {
-    let weatherHTML = `<div id=\"day${weatherData[0].time}\"><b>Forecast</b>`;
+    let weatherHTML = `<div class=\"forecast\">FORCAST</div>`;
     weatherData.forEach((date) => {
       let newDate = new Date(date.time*1000)
       let timeDifference = Math.ceil(timeDiff(Date.now(), newDate))
       if (timeDifference >= 0 && timeDifference < 8) {
         let Icon = weatherIcon(date.icon);
+        weatherHTML += `<div id=\"day${weatherData[0].time}\" class=\"weatherDay label\">`;
         weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
         weatherHTML += `<div class=\"weatherDate\">${convertTimeStamp(date.time)}</div>`;
         weatherHTML += `<div class=\"weatherDetail\">${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
-        weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
+        weatherHTML += `Temp Low: ${date.temperatureLow}</div></div>`;
       }
     });
-    weatherHTML += `</div>`;
+    // weatherHTML += `</div>`;
     document.getElementById(`tripWeather${arrayLoc}`).innerHTML = weatherHTML;
   }
 };

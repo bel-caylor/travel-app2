@@ -17,34 +17,21 @@ header {
 }
 
 img {
-width: 100%;
-height: auto;
+  width: 100%;
+  height: auto;
+  align-items: center;
 }
 
-input {
-  background: #B1D7FF;
-  color: black;
-  padding: 3px;
-  margin: 5px;
-}
-
-.button {
-  background: lightSalmon;
-  color: black;
-  padding: 5px 20px 5px 20px;
-  font-weight: bold;
-}
-
-.dates {
-  display: inline-block;
-}
-
-.label {
+.label, .forecast {
   font-weight: bold;
 }
 
 .tripImage {
-  max-width: 250px;
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .travelDates {
@@ -55,6 +42,27 @@ input {
   font-size: 0.7em;
 }
 
+.icon {
+  width: 15%;
+}
+
+input {
+  background: #B1D7FF;
+  color: black;
+  padding: 3px;
+  margin: 5px;
+}
+
+.dates {
+  display: inline-block;
+}
+
+.button {
+  background: lightSalmon;
+  color: black;
+  padding: 5px 20px 5px 20px;
+  font-weight: bold;
+}
 
 input:hover {
   background: #C7E1FC;
@@ -74,14 +82,6 @@ button:hover {
 
 }
 
-.weatherIcon {
-  opacity: 1.0
-}
-
-.icon {
-  width: 15%;
-}
-
 .trip {
   position: relative;
   background-color: rgba(0,0,0,.5);
@@ -99,9 +99,9 @@ button:hover {
 
 }
 
-section {
-  display: inline-block;
-}
+// section {
+//   display: inline-block;
+// }
 
 footer {
   padding: 20px;
