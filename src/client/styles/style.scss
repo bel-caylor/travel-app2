@@ -43,9 +43,18 @@ input {
   font-weight: bold;
 }
 
-.info {
-  font: 0.5em;
+.tripImage {
+  max-width: 250px;
 }
+
+.travelDates {
+    font-size: 0.8em;
+}
+
+.info, .weatherDetail {
+  font-size: 0.7em;
+}
+
 
 input:hover {
   background: #C7E1FC;

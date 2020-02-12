@@ -119,6 +119,10 @@ function hndlDestDropDown (event) {
     removeDropDown();
     // document.getElementById('dropdownID').remove()
     toggleElement('destDropDown');
+    // let dateNow = new Date;
+    // let formatNow = dateNow.getFullYear() + "-" + dateNow.getMonth() + "-" +
+    // document.getElementById('startDate').value = Date.now()
+    // document.getElementById('endDate').value = Date.now()
     toggleElement('dates');
     placeNames = [];
 };

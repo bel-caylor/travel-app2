@@ -34,7 +34,7 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD section
   let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"results trip label\">`
   HTMLresults += `<div id=\"photo${arrayLoc}\" class=\"locationPhoto\">`
-  HTMLresults += `<img id=\"img${arrayLoc}\" ></div>`
+  HTMLresults += `<img id=\"img${arrayLoc}\" class=\"tripImage\" ></div>`
   HTMLresults += `<div id=\"tripDetails${arrayLoc}\" class=\"tripDetails\"></div>`
   HTMLresults += `<div id=\"tripWeather${arrayLoc}\" class="weather"></div>`
   HTMLresults += `<form id=\"delTrip${arrayLoc}\" onsubmit=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\">`
@@ -71,8 +71,8 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
       if (timeDifference >= 0 && timeDifference < 8) {
         let Icon = weatherIcon(date.icon);
         weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
-        weatherHTML += `<div class=\"weatherDetail\">Date: ${convertTimeStamp(date.time)}<br>`;
-        weatherHTML += `${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
+        weatherHTML += `<div class=\"weatherDate\">${convertTimeStamp(date.time)}</div>`;
+        weatherHTML += `<div class=\"weatherDetail\">${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
         weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
       }
     });
