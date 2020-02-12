@@ -15,6 +15,7 @@ import {toggleElement, tripArray} from './defineTrip.js';
 import {timeDiff} from './defineTripDates.js';
 // import header from '../image/header-logo.jpg'
 let weatherData = {};
+require("regenerator-runtime");
 
 const getWeather = async (tripArray, arrayLoc) => {
   const res = await fetch(`${port}/getWeather/${tripArray[arrayLoc].lat}/${tripArray[arrayLoc].lng}/${tripArray[arrayLoc].start}/${tripArray[arrayLoc].numDays}`)

@@ -1,3 +1,4 @@
+require("regenerator-runtime");
 import {port} from '../index.js';
 import {tripDates} from './defineTripDates.js';
 const body = document.getElementById('body')
