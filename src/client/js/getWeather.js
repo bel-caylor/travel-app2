@@ -50,22 +50,35 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
   document.getElementById(`img${arrayLoc}`).src = tripArray.photo;
   let tripSection = `<div class=\"destination\">${tripArray.placeName}, ${tripArray.adminName1}, ${tripArray.countryCode}</div>`
   tripSection += `<div class=\"travelDates\">From: ${start.slice(0,10)} to ${end.slice(0,10)}</div>`
+  //Add Trip Start In:
   if (startIn > 0) {
-    tripSection += `<div class=\"startIn\">Trip Start In: ${startIn} Days</div>`
+    tripSection += `<div class=\"info\">Trip Start In: ${startIn} Days</div>`
   }
+  //Add Historical Data
+  if (startIn < 0 || startIn > 7) {
+    tripSection += `<div class=\"info\">Historical HIGH Temp: ${weatherData[0].temperatureHigh}</div>`
+    tripSection += `<div class=\"info\">Historical LOW Temp: ${weatherData[0].temperatureLow}</div>`
+  }
+
   document.getElementById(`tripDetails${arrayLoc}`).innerHTML = tripSection
 
-//ADD weather data
-  let weatherHTML = `<div id=\"day${weatherData.time}\">`;
-  weatherData.forEach((date) => {
-    let Icon = weatherIcon(date.icon);
-    weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
-    weatherHTML += `<div class=\"weatherDetail\">Date: ${convertTimeStamp(date.time)}<br>`;
-    weatherHTML += `${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
-    weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
-  });
-  weatherHTML += `</div>`;
-  document.getElementById(`tripWeather${arrayLoc}`).innerHTML = weatherHTML;
+//ADD forecastweather data
+  if (startIn >= 0 && startIn < 8) {
+    let weatherHTML = `<div id=\"day${weatherData[0].time}\"><b>Forecast</b>`;
+    weatherData.forEach((date) => {
+      let newDate = new Date(date.time*1000)
+      let timeDifference = Math.ceil(timeDiff(Date.now(), newDate))
+      if (timeDifference >= 0 && timeDifference < 8) {
+        let Icon = weatherIcon(date.icon);
+        weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
+        weatherHTML += `<div class=\"weatherDetail\">Date: ${convertTimeStamp(date.time)}<br>`;
+        weatherHTML += `${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
+        weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
+      }
+    });
+    weatherHTML += `</div>`;
+    document.getElementById(`tripWeather${arrayLoc}`).innerHTML = weatherHTML;
+  }
 };
 
 function weatherIcon(icon) {
