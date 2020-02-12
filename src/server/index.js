@@ -106,6 +106,7 @@ app.get('/getWeather/:latitude/:longitude/:startDate/:tripLength', async (req,re
 app.get('/getPhoto/:placeName/:state/:country', async (req,res) => {
   const URL = 'https://pixabay.com/api/?key=';
   const key = process.env.PIXABAY_API_KEY;
+  console.log('Started getPhoto');
   let response =  await fetch(URL + key + "&q=" + req.params.placeName + "+" + req.params.state + "&image_type=photo&category=travel")
   try {
     let data = await response.json()

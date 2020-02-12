@@ -59,7 +59,7 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
     tripSection += `<div class=\"info\">Historical HIGH Temp: ${weatherData[0].temperatureHigh}</div>`
     tripSection += `<div class=\"info\">Historical LOW Temp: ${weatherData[0].temperatureLow}</div>`
   }
-
+  tripSection += `<br>`
   document.getElementById(`tripDetails${arrayLoc}`).innerHTML = tripSection
 
 //ADD forecastweather data

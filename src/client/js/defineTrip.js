@@ -75,22 +75,27 @@ function createDestDropDown(formDestination) {
 
   //If there is multiple locations toggle dropdown form else toggle dates form.
   if (placeNames.length > 1) {
-    let dropDownHTML = `<select id="dropdownID">`
-    for (const loc of placeNames) {
-      dropDownHTML += `<option value=\"${loc.postalCode}\">${loc.placeName}, ${loc.adminName1}, ${loc.countryCode}</option>`
+    // let dropDownHTML = `<select id="dropdownID">`
+    let dropDownSelect = document.getElementById("dropdownID");
+      for (const loc of placeNames) {
+      var option = document.createElement("option");
+      option.value = `${loc.postalCode}`;
+      option.text = `${loc.placeName}, ${loc.adminName1}, ${loc.countryCode}`;
+      dropDownSelect.add(option);
+      // dropDownHTML += `<option value=\"${loc.postalCode}\">${loc.placeName}, ${loc.adminName1}, ${loc.countryCode}</option>`
     }
-    dropDownHTML += `</select>`;
-    document.getElementById('destDropDown').insertAdjacentHTML('afterbegin', dropDownHTML);
+    // dropDownHTML += `</select>`;
+    // document.getElementById('destDropDown').insertAdjacentHTML('afterbegin', dropDownHTML);
     toggleElement('destDropDown');
   }else{
     toggleElement('dates');
   }
+
 };
 
 
 function hndlDestDropDown (event) {
   event.preventDefault()
-  toggleElement('destDropDown');
 //Find selected lcoation in placeNames
     let postalCode = document.getElementById('dropdownID').value;
     for (const placeName of placeNames) {
@@ -111,7 +116,11 @@ function hndlDestDropDown (event) {
           })
       };
     };
+    removeDropDown();
+    // document.getElementById('dropdownID').remove()
+    toggleElement('destDropDown');
     toggleElement('dates');
+    placeNames = [];
 };
 
 const getPhoto = async (place, state, country) => {
@@ -134,6 +143,13 @@ function toggleElement(ID) {
     elementID.style.display = "block";
   } else {
     elementID.style.display = "none";
+  }
+};
+
+function removeDropDown () {
+  let x = document.getElementById("dropdownID")
+  while (x.length > 0) {
+    x.remove(0)
   }
 };
 

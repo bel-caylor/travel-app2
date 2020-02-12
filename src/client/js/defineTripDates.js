@@ -4,7 +4,6 @@ import {timeDiff} from './timeDiff.js';
 
 function hndlDateSubmit (event) {
   event.preventDefault();
-  document.getElementById('dropdownID').remove()
   toggleElement('dates');
   let start = document.getElementById('startDate').value;
   let end = document.getElementById('endDate').value
