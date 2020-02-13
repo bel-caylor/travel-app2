@@ -69,7 +69,11 @@ function createDestDropDown(formDestination) {
 
   });
   console.log(placeNames);
-
+  if (placeNames.length === 0) {
+    alert("Please enter a valid city.");
+    toggleElement('destination');
+    return;
+  };
 
 //Update UI
 
@@ -89,6 +93,7 @@ function createDestDropDown(formDestination) {
     toggleElement('destDropDown');
   }else{
     toggleElement('dates');
+    addTripToArray(placeNames[0].postalCode, placeNames[0])
   }
 
 };
@@ -100,20 +105,7 @@ function hndlDestDropDown (event) {
     let postalCode = document.getElementById('dropdownID').value;
     for (const placeName of placeNames) {
       if (postalCode === placeName.postalCode) {
-        getPhoto(placeName.placeName, placeName.adminName1, placeName.countryCode)
-          .then(() => {
-            let newEntry = {
-              postalCode: postalCode,
-              placeName: placeName.placeName,
-              adminName1: placeName.adminName1,
-              countryCode: placeName.countryCode,
-              lng: placeName.lng,
-              lat: placeName.lat,
-              photo: httpPhoto
-            };
-            tripArray.push(newEntry);
-            console.log(tripArray);
-          })
+        addTripToArray(postalCode, placeName)
       };
     };
     removeDropDown();
@@ -127,6 +119,23 @@ function hndlDestDropDown (event) {
     placeNames = [];
 };
 
+function addTripToArray (postalCode, postalCodes) {
+  getPhoto(postalCodes.placeName, postalCodes.adminName1, postalCodes.countryCode)
+    .then(() => {
+      let newEntry = {
+        postalCode: postalCode,
+        placeName: postalCodes.placeName,
+        adminName1: postalCodes.adminName1,
+        countryCode: postalCodes.countryCode,
+        lng: postalCodes.lng,
+        lat: postalCodes.lat,
+        photo: httpPhoto
+      };
+      tripArray.push(newEntry);
+      console.log(tripArray);
+  })
+};
+
 const getPhoto = async (place, state, country) => {
   const res = await fetch(`${port}/getPhoto/${place}/${state}/${country}`)
   try {
@@ -138,6 +147,7 @@ const getPhoto = async (place, state, country) => {
   }
   catch(error) {
     console.log("error", error);
+    httpPhoto = '5bba6920565ab7ee25d1538c9aa2e224.jpg';
   }
 };
 
