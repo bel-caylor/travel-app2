@@ -8,7 +8,7 @@ const testServerData = require('./testServer.js')
 const fetch = require("node-fetch");
 
 // Setup port
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server Running on PORT ${port}`);
 });
