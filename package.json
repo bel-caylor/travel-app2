@@ -1,5 +1,5 @@
 {
-  "name": "Travel-App",
+  "name": "travel-app",
   "jest": {
     "verbose": true,
     "moduleFileExtensions": [
@@ -26,6 +26,7 @@
   "scripts": {
     "test": "jest",
     "start": "node src/server/index.js",
+    "heroku-postbuild": "webpack --config webpack.prod.js",
     "build-prod": "rm -rf dist && webpack --config webpack.prod.js",
     "build-dev": "rm -rf dist && webpack --config webpack.dev.js",
     "devs": "webpack-dev-server  --config webpack.dev.js"
@@ -39,7 +40,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
-    "webpack": "^4.41.5",
+    "webpack": "^4.41.6",
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
@@ -61,5 +62,13 @@
     "terser-webpack-plugin": "^2.3.4",
     "webpack-dev-server": "^3.10.1",
     "workbox-webpack-plugin": "^5.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bel-caylor/travel-app2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bel-caylor/travel-app2/issues"
+  },
+  "homepage": "https://github.com/bel-caylor/travel-app2#readme"
 }
