@@ -111,12 +111,24 @@ function hndlDestDropDown (event) {
     removeDropDown();
     // document.getElementById('dropdownID').remove()
     toggleElement('destDropDown');
-    // let dateNow = new Date;
-    // let formatNow = dateNow.getFullYear() + "-" + dateNow.getMonth() + "-" +
-    // document.getElementById('startDate').value = Date.now()
-    // document.getElementById('endDate').value = Date.now()
+    let dateNow = new Date;
+    // let formatNow = dateNow.getFullYear() + "-" + dateNow.getMonth() + "-" + dateNow.getDate
+    // let dateNow7 = dateNow.getDate() + 7;
+    // let formatNow7 =
+    document.getElementById('startDate').value = dateFormat(dateNow)
+    // document.getElementById('endDate').value = dateFormat(dateNow)
+    document.getElementById('endDate').value = dateFormat(dateNow.setDate(dateNow.getDate() + 7))
     toggleElement('dates');
     placeNames = [];
+};
+
+function dateFormat(inputDate) {
+  let timestamp = new Date(inputDate)
+  let month = (timestamp.getMonth() + 1)
+  if (month < 10) {month = "0" + month};
+  let strDate = timestamp.getFullYear() + "-" + month + "-" + timestamp.getDate();
+  console.log(strDate);
+  return strDate;
 };
 
 function addTripToArray (postalCode, postalCodes) {
