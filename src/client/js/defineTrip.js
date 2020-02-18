@@ -111,7 +111,7 @@ function hndlDestDropDown (event) {
     removeDropDown();
     // document.getElementById('dropdownID').remove()
     toggleElement('destDropDown');
-    let dateNow = new Date;
+    let dateNow = new Date();
     // let formatNow = dateNow.getFullYear() + "-" + dateNow.getMonth() + "-" + dateNow.getDate
     // let dateNow7 = dateNow.getDate() + 7;
     // let formatNow7 =

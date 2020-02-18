@@ -19,7 +19,17 @@ let weatherData = {};
 require("regenerator-runtime");
 
 const getWeather = async (tripArray, arrayLoc) => {
-  const res = await fetch(`${port}/getWeather/${tripArray[arrayLoc].lat}/${tripArray[arrayLoc].lng}/${tripArray[arrayLoc].start}/${tripArray[arrayLoc].numDays}`)
+  //If the trip is within the next week return 7-Day forcast and an extra day for historical data.
+  let nowDate = new Date();
+  let startDiff = timeDiff(nowDate, tripArray[arrayLoc].start)
+  let endDiff = timeDiff(nowDate, tripArray[arrayLoc].end)
+  let startDate = new Date();
+  let tripLength = 9
+  if ((startDiff < 0 || startDiff > 8) && (endDiff < 0 || endDiff > 8)) {
+    startDate = new Date(tripArray[arrayLoc].start);
+    tripLength = tripArray[arrayLoc].numDays
+  };
+  const res = await fetch(`${port}/getWeather/${tripArray[arrayLoc].lat}/${tripArray[arrayLoc].lng}/${startDate}/${tripLength}`)
   try {
     weatherData = await res.json();
     console.log(weatherData);
