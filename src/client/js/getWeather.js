@@ -24,7 +24,7 @@ const getWeather = async (tripArray, arrayLoc) => {
   let startDiff = timeDiff(nowDate, tripArray[arrayLoc].start)
   let endDiff = timeDiff(nowDate, tripArray[arrayLoc].end)
   let startDate = new Date();
-  let tripLength = 9
+  let tripLength = 10
   if ((startDiff < 0 || startDiff > 8) && (endDiff < 0 || endDiff > 8)) {
     startDate = new Date(tripArray[arrayLoc].start);
     tripLength = tripArray[arrayLoc].numDays
@@ -43,10 +43,10 @@ const getWeather = async (tripArray, arrayLoc) => {
 function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD section
   let HTMLresults = `<div id=\"trip${arrayLoc}\" class=\"resultLayout results trip label\">`
-  HTMLresults += `<div id=\"photo${arrayLoc}\" class=\"locationPhoto tripImage\">`
+  HTMLresults += `<div class=\"tripInfo\"><div id=\"photo${arrayLoc}\" class=\"locationPhoto tripImage\">`
   HTMLresults += `<img id=\"img${arrayLoc}\"></div>`
-  HTMLresults += `<div id=\"tripDetails${arrayLoc}\" class=\"tripDetails\"></div>`
-  HTMLresults += `<div id=\"tripWeather${arrayLoc}\" class="weather"></div>`
+  HTMLresults += `<div id=\"tripDetails${arrayLoc}\" class=\"tripDetails\"></div></div>`
+  HTMLresults += `<div id=\"forecast${arrayLoc}\" class="forecast"></div>`
   HTMLresults += `<form id=\"delTrip${arrayLoc}\" onsubmit=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\" class=\"deleteButton\">`
   HTMLresults += `<button id=\"deleteTrip${arrayLoc}\" type = \"submit\"  onclick=\"return Client.hndlDeleteTrip(event, ${arrayLoc})\"> `
   HTMLresults += `Delete Trip </button></form></div>`
@@ -73,22 +73,23 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
   document.getElementById(`tripDetails${arrayLoc}`).innerHTML = tripSection
 
 //ADD forecastweather data
-  if (startIn >= 0 && startIn < 8) {
-    let weatherHTML = `<div class=\"forecast\">FORCAST</div>`;
+  if (startIn > -1 && startIn < 8) {
+    let weatherHTML = ``;
+    // let weatherHTML = `<div class=\"forecast\">`;
     weatherData.forEach((date) => {
       let newDate = new Date(date.time*1000)
       let timeDifference = Math.ceil(timeDiff(Date.now(), newDate))
       if (timeDifference >= 0 && timeDifference < 8) {
         let Icon = weatherIcon(date.icon);
-        weatherHTML += `<div id=\"day${weatherData[0].time}\" class=\"weatherDay label\">`;
+        // weatherHTML += `<div id=\"day${weatherData[0].time}\" class=\"weatherDay label\">`;
         weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
         weatherHTML += `<div class=\"weatherDate\">${convertTimeStamp(date.time)}</div>`;
         weatherHTML += `<div class=\"weatherDetail\">${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
-        weatherHTML += `Temp Low: ${date.temperatureLow}</div></div>`;
+        weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
       }
     });
     // weatherHTML += `</div>`;
-    document.getElementById(`tripWeather${arrayLoc}`).innerHTML = weatherHTML;
+    document.getElementById(`forecast${arrayLoc}`).innerHTML = weatherHTML;
   }
 };
 

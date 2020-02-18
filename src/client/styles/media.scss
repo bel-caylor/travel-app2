@@ -1,10 +1,23 @@
-#results {
-  display: block;
-  width: 100%;
-  align-items: left;
-}
+// #results {
+//   display: block;
+//   width: 100%;
+//   align-items: left;
+// }
 
-.resultLayout {
+// .resultLayout {
+//   display: grid;
+//   grid-template-columns: 100%;
+//   grid-template-rows: auto;
+//   grid-gap: 10px;
+//   align-items: center;
+//   grid-template-areas:
+//   "pht"
+//   "dtl"
+//   "wth"
+//   "del"
+// }
+
+.tripInfo {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto;
@@ -13,8 +26,6 @@
   grid-template-areas:
   "pht"
   "dtl"
-  "wth"
-  "del"
 }
 
 .locationPhoto {
@@ -29,11 +40,28 @@
 
 .forecast {
   display: grid;
-  grid-area: frc;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(8, [row] auto  );
+  grid-gap: 10px;
+  align-items: center;
+  grid-template-areas:
+  icn
+  day
+  wth
 }
 
-.weather {
-  // display: grid;
+.weatherIcon {
+  display: grid;
+  grid-area: icn;
+}
+
+.weatherDate {
+  display: grid;
+  grid-area: day;
+}
+
+.weatherDetail {
+  display: grid;
   grid-area: wth;
 }
 
@@ -42,33 +70,33 @@
   grid-area: del;
 }
 
-@media screen and (min-width:800px) {
-  .resultLayout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    // grid-template-rows: auto;
-    grid-template-areas:
-    "pht dtl"
-    "wth wth"
-    "del del"
-  }
+// @media screen and (min-width:800px) {
+  // .resultLayout {
+  //   display: grid;
+  //   grid-template-columns: 1fr 1fr;
+  //   // grid-template-rows: auto;
+  //   grid-template-areas:
+  //   "pht dtl"
+  //   "wth wth"
+  //   "del del"
+  // }
 
-.weather {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  // grid-template-rows: auto;
-  grid-template-areas:
-  "frc frc frc frc frc frc frc"
-  "wday wday wday wday wday wday wday"
-}
-.forecast {
-  display: grid;
-  grid-area: frc;
-}
-
-.weatherDay {
-  display: grid;
-  grid-area: wday;
-}
-
-}
+// .weather {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+//   // grid-template-rows: auto;
+//   grid-template-areas:
+//   "frc frc frc frc frc frc frc"
+//   "wday wday wday wday wday wday wday"
+// }
+// .forecast {
+//   display: grid;
+//   grid-area: frc;
+// }
+//
+// .weatherDay {
+//   display: grid;
+//   grid-area: wday;
+// }
+//
+// }

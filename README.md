@@ -19,11 +19,10 @@ Create .env file at the root.
 - Update logo photo - reduce size of watch and height of logo
 - Split html grid into div tripInfo and div weather
 - Size trip font to fill grid
-- Create 3 media sizes for forecast (fix forcast title - 7 Day ForeCast)
+- Create 3 media sizes for forecast (7 Day ForeCast)
   - small icon on top of weather details in one column
   - medium icon in left column - weather detail in right column
   - large 7 column weather details'
-- Change weather pull to include 7 Day forcast if trip is within 7 days.
 - Create geoname summary Array.  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
   -test if copy in array
   -splice
