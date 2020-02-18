@@ -59,7 +59,7 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
   let startIn = Math.ceil(timeDiff(Date.now(), tripArray.start))
   document.getElementById(`img${arrayLoc}`).src = tripArray.photo;
   let tripSection = `<div class=\"destination\">${tripArray.placeName}, ${tripArray.adminName1}, ${tripArray.countryCode}</div>`
-  tripSection += `<div class=\"travelDates\">From: ${start.slice(0,10)} to ${end.slice(0,10)}</div>`
+  tripSection += `<div class=\"travelDates\">From ${start.slice(0,10)} to ${end.slice(0,10)}</div>`
   //Add Trip Start In:
   if (startIn > 0) {
     tripSection += `<div class=\"info\">Trip Start In: ${startIn} Days</div>`
@@ -74,18 +74,19 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
 
 //ADD forecastweather data
   if (startIn > -1 && startIn < 8) {
-    let weatherHTML = ``;
-    // let weatherHTML = `<div class=\"forecast\">`;
+    // let weatherHTML = ``;
+    let weatherHTML = `<div class=\"label\">FORECAST</div>`;
     weatherData.forEach((date) => {
       let newDate = new Date(date.time*1000)
       let timeDifference = Math.ceil(timeDiff(Date.now(), newDate))
       if (timeDifference >= 0 && timeDifference < 8) {
         let Icon = weatherIcon(date.icon);
-        // weatherHTML += `<div id=\"day${weatherData[0].time}\" class=\"weatherDay label\">`;
+        weatherHTML += `<div class=\"day\">`;
         weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
         weatherHTML += `<div class=\"weatherDate\">${convertTimeStamp(date.time)}</div>`;
-        weatherHTML += `<div class=\"weatherDetail\">${date.summary}<br>Temp High: ${date.temperatureHigh}<br>`;
-        weatherHTML += `Temp Low: ${date.temperatureLow}</div>`;
+        weatherHTML += `<div class=\"weatherDetail\"><div class=\"summary\">${date.summary}</div>`;
+        weatherHTML += `<div class=\"temp\">High: ${date.temperatureHigh}&#8457</div>`;
+        weatherHTML += `<div class=\"temp\">Low: ${date.temperatureLow}&#8457</div></div></div>`;
       }
     });
     // weatherHTML += `</div>`;

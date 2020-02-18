@@ -20,10 +20,17 @@ img {
   width: 100%;
   height: auto;
   align-items: center;
+  vertical-align: middle;
 }
 
-.label, .forecast {
+.label {
   font-weight: bold;
+  font-size: 4vw;
+  line-height: 5vh;
+}
+
+.forecast .label {
+  border-bottom: 1px solid #333;
 }
 
 .tripImage {
@@ -32,18 +39,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-}
-
-.travelDates {
-    font-size: 0.8em;
-}
-
-.info, .weatherDetail {
-  font-size: 0.7em;
-}
-
-.icon {
-  width: 15%;
 }
 
 input {
@@ -97,6 +92,17 @@ button:hover {
   // height: 50vh;
   // line-height: 2em;
 
+}
+
+.tripInfo {
+  margin-bottom: 20px;
+}
+
+.weatherDate {
+  font-weight: bold;
+  font-size: 5vw;
+  // vertical-align: bottom;
+  // align-self: end;
 }
 
 // section {

@@ -1,102 +1,194 @@
-// #results {
-//   display: block;
-//   width: 100%;
-//   align-items: left;
-// }
+@media screen and (max-width:400px) {
+  #results {
+    margin-top: -5vh;
+  }
 
-// .resultLayout {
-//   display: grid;
-//   grid-template-columns: 100%;
-//   grid-template-rows: auto;
-//   grid-gap: 10px;
-//   align-items: center;
-//   grid-template-areas:
-//   "pht"
-//   "dtl"
-//   "wth"
-//   "del"
-// }
+  .tripInfo {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+    grid-template-areas:
+    "pht"
+    "dtl"
+  }
 
-.tripInfo {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: auto;
-  grid-gap: 10px;
-  align-items: center;
-  grid-template-areas:
-  "pht"
-  "dtl"
+  .locationPhoto {
+    display: grid;
+    grid-area: pht;
+  }
+
+  .tripDetails {
+    display: grid;
+    grid-area: dtl;
+  }
+
+  .forecast {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+  }
+
+  .day {
+    display: grid;
+  }
+
+  .icon {
+    max-width: 100px;
+  }
+
+  .weatherDetail {
+    display: block;
+    .summary {
+      font-size: 4vw;
+    }
+    .temp {
+      font-size: 5vw;
+    }
+  }
+
+  .deleteButton {
+    display: grid;
+    grid-area: del;
+  }
+
+  .destination {
+    font-size: 6vw;
+  }
+
+  .travelDates {
+      font-size: 5vw;
+  }
+
+  .info, .weatherDetail {
+    font-size: 2vw;
+  }
+
 }
 
-.locationPhoto {
-  display: grid;
-  grid-area: pht;
+@media (min-width:401px) and (max-width: 1100px){
+  #results {
+    margin-top: -10vh;
+  }
+
+  .tripInfo {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+    grid-template-areas:
+    "pht dtl"
+  }
+  .forecast {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 0.7fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "icn day"
+    "icn wth"
+  }
+
+  .weatherIcon {
+    display: grid;
+    grid-area: icn;
+  }
+
+  .weatherDate {
+    display: grid;
+    grid-area: day;
+  }
+
+  .weatherDetail {
+    display: grid;
+    grid-area: wth;
+    border-bottom: 1px solid #333;
+    .summary {
+      font-size: 4vw;
+    }
+    .temp {
+      font-size: 4vw;
+    }
+  }
+
+  .destination {
+    font-size: 4vw;
+  }
+
+  .travelDates {
+      font-size: 3vw;
+  }
 }
 
-.tripDetails {
-  display: grid;
-  grid-area: dtl;
+@media screen and (min-width:1101px) {
+  #results {
+    margin-top: -10vh;
+  }
+
+  .tripInfo {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+    grid-template-areas:
+    "pht dtl"
+  }
+  .forecast {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    align-items: center;
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 0.7fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "icn day"
+    "icn wth"
+  }
+
+  .weatherIcon {
+    display: grid;
+    grid-area: icn;
+  }
+
+  .weatherDate {
+    display: grid;
+    grid-area: day;
+  }
+
+  .weatherDetail {
+    display: grid;
+    grid-area: wth;
+    border-bottom: 1px solid #333;
+    .summary {
+      font-size: 4vw;
+    }
+    .temp {
+      font-size: 4vw;
+    }
+  }
+
+  .destination {
+    font-size: 4vw;
+  }
+
+  .travelDates {
+      font-size: 3vw;
+  }
 }
-
-.forecast {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: repeat(8, [row] auto  );
-  grid-gap: 10px;
-  align-items: center;
-  grid-template-areas:
-  icn
-  day
-  wth
-}
-
-.weatherIcon {
-  display: grid;
-  grid-area: icn;
-}
-
-.weatherDate {
-  display: grid;
-  grid-area: day;
-}
-
-.weatherDetail {
-  display: grid;
-  grid-area: wth;
-}
-
-.deleteButton {
-  display: grid;
-  grid-area: del;
-}
-
-// @media screen and (min-width:800px) {
-  // .resultLayout {
-  //   display: grid;
-  //   grid-template-columns: 1fr 1fr;
-  //   // grid-template-rows: auto;
-  //   grid-template-areas:
-  //   "pht dtl"
-  //   "wth wth"
-  //   "del del"
-  // }
-
-// .weather {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-//   // grid-template-rows: auto;
-//   grid-template-areas:
-//   "frc frc frc frc frc frc frc"
-//   "wday wday wday wday wday wday wday"
-// }
-// .forecast {
-//   display: grid;
-//   grid-area: frc;
-// }
-//
-// .weatherDay {
-//   display: grid;
-//   grid-area: wday;
-// }
-//
-// }
