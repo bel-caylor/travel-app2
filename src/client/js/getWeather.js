@@ -75,19 +75,22 @@ function resultsHTML(tripArray, weatherData, arrayLoc) {
 //ADD forecastweather data
   if (startIn > -1 && startIn < 8) {
     // let weatherHTML = ``;
-    let weatherHTML = `<div class=\"label\">FORECAST</div>`;
+    let weatherHTML = `<div class=\"forecastLabel label\">FORECAST</div>`;
+    let count = 1;
     weatherData.forEach((date) => {
       let newDate = new Date(date.time*1000)
       let timeDifference = Math.ceil(timeDiff(Date.now(), newDate))
-      if (timeDifference >= 0 && timeDifference < 8) {
+
+      if (timeDifference >= 0 && timeDifference < 7) {
         let Icon = weatherIcon(date.icon);
-        weatherHTML += `<div class=\"day\">`;
+        weatherHTML += `<div id=\"day${count}\" class=\"day\">`;
         weatherHTML += `<div class=\"weatherIcon\"><img class=\"icon\" src=\"${Icon}\"></div>`;
         weatherHTML += `<div class=\"weatherDate\">${convertTimeStamp(date.time)}</div>`;
-        weatherHTML += `<div class=\"weatherDetail\"><div class=\"summary\">${date.summary}</div>`;
-        weatherHTML += `<div class=\"temp\">High: ${date.temperatureHigh}&#8457</div>`;
-        weatherHTML += `<div class=\"temp\">Low: ${date.temperatureLow}&#8457</div></div></div>`;
+        weatherHTML += `<div class=\"weatherDetail\"><div class=\"temp\">Low: ${Math.round(date.temperatureLow)}&#8457</div>`;
+        weatherHTML += `<div class=\"temp\">High: ${Math.round(date.temperatureHigh)}&#8457</div>`;
+        weatherHTML += `<div class=\"summary\">${date.summary}</div></div></div>`;
       }
+        count = count + 1
     });
     // weatherHTML += `</div>`;
     document.getElementById(`forecast${arrayLoc}`).innerHTML = weatherHTML;

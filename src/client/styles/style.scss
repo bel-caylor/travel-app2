@@ -100,14 +100,14 @@ button:hover {
 
 .weatherDate {
   font-weight: bold;
-  font-size: 5vw;
+  // font-size: 5vw;
   // vertical-align: bottom;
   // align-self: end;
 }
 
-// section {
-//   display: inline-block;
-// }
+.icon {
+  max-width: 15vw;
+}
 
 footer {
   padding: 20px;

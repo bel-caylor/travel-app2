@@ -1,4 +1,4 @@
-@media screen and (max-width:400px) {
+@media screen and (max-width:300px) {
   #results {
     margin-top: -5vh;
   }
@@ -36,10 +36,6 @@
     display: grid;
   }
 
-  .icon {
-    max-width: 100px;
-  }
-
   .weatherDetail {
     display: block;
     .summary {
@@ -69,7 +65,7 @@
 
 }
 
-@media (min-width:401px) and (max-width: 1100px){
+@media (min-width:301px) and (max-width: 500px){
   #results {
     margin-top: -10vh;
   }
@@ -93,7 +89,7 @@
 
   .day {
     display: grid;
-    grid-template-columns: 0.7fr 2fr;
+    grid-template-columns: 0.6fr 2fr;
     grid-template-rows: auto;
     grid-template-areas:
     "icn day"
@@ -103,11 +99,14 @@
   .weatherIcon {
     display: grid;
     grid-area: icn;
+    align-self: center;
+    justify-content: center;
   }
 
   .weatherDate {
     display: grid;
     grid-area: day;
+    font-size: 4.5vw;
   }
 
   .weatherDetail {
@@ -131,7 +130,7 @@
   }
 }
 
-@media screen and (min-width:1101px) {
+@media screen and (min-width:501px) {
   #results {
     margin-top: -10vh;
   }
@@ -147,19 +146,58 @@
   }
   .forecast {
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(3,auto);
     grid-gap: 10px;
     align-items: center;
+    grid-template-areas:
+    "lbl lbl lbl lbl lbl lbl lbl"
+    "day1 day2 day3 day4 day5 day6 day7"
+
+  }
+  .forecastLabel {
+    display: grid;
+    grid-area: lbl;
+  }
+
+  #day1 {
+    display: grid;
+    grid-area: day1;
+  }
+  #day2 {
+    display: grid;
+    grid-area: day2;
+  }
+  #day3 {
+    display: grid;
+    grid-area: day3;
+  }
+  #day4 {
+    display: grid;
+    grid-area: day4;
+  }
+  #day5 {
+    display: grid;
+    grid-area: day5;
+  }
+  #day6 {
+    display: grid;
+    grid-area: day6;
+  }
+  #day7 {
+    display: grid;
+    grid-area: day7;
   }
 
   .day {
     display: grid;
-    grid-template-columns: 0.7fr 2fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
+    align-self: flex-start;
     grid-template-areas:
-    "icn day"
-    "icn wth"
+    "date"
+    "icn"
+    "wth"
   }
 
   .weatherIcon {
@@ -169,18 +207,19 @@
 
   .weatherDate {
     display: grid;
-    grid-area: day;
+    grid-area: date;
+    font-size: 1.8vw;
   }
 
   .weatherDetail {
     display: grid;
     grid-area: wth;
-    border-bottom: 1px solid #333;
+    // border-bottom: 1px solid #333;
     .summary {
-      font-size: 4vw;
+      font-size: 1.5vw;
     }
     .temp {
-      font-size: 4vw;
+      font-size: 2vw;
     }
   }
 
