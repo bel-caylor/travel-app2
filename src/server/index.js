@@ -36,21 +36,19 @@ app.get('/', (req, res) => {
 });
 
 //Callback functions
-const getGeoNames = async (req, res) => {
-    const URL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
-    console.log('Started GeoNames');
-    console.log(req.params.destination);
-    const response = await fetch(URL + req.params.destination + '&username=bcaylor')
-    try {
-      const data = await response.json()
-      console.log(data)
-      return data;
-    }
-    catch(error) {
-      console.log("error", error)
-    }
-    res.send(response)
-};
+// const formatGeoNames = (data) => {
+//   let newGeoNames = {"postalCodes":[]};
+//   data.forEach((entry) => {
+//     let newEntry = {
+//       postalCode = entry.postalCode,
+//       placeName = entry.placeName,
+//       adminName1 = entry.adminName1,
+//       countryCode = data.postalCodes[].countryCode
+//     };
+//   })
+//
+//
+// };
 
 app.get('/geoNames/:destination', async (req, res) => {
   const URL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';

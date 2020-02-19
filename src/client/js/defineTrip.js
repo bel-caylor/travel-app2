@@ -41,33 +41,66 @@ function createDestDropDown(formDestination) {
   const location = geoNames.postalCodes;
   console.log(location);
 // Remove duplicate places and populate placeNames with unique places.
-  location.forEach((postalCodes) => {
-    if (formDestination === postalCodes.placeName) {
-      let newEntry = {
-        postalCode: postalCodes.postalCode,
-        placeName: postalCodes.placeName,
-        adminName1: postalCodes.adminName1,
-        countryCode: postalCodes.countryCode,
-        lng: postalCodes.lng,
-        lat: postalCodes.lat
-      };
-
-      if (placeNames.length === 0) {
-        placeNames.push(newEntry);
-      }else{
-        for (const place of placeNames) {
-          if (postalCodes.adminName1 === place.adminName1) {
-            break;
-          }else{
-            placeNames.push(newEntry);
-            console.log(placeNames);
-            break;
-          };
-        };
-      };
+// Put the most common names at the top.
+  location.forEach((entry) => {
+    let newEntry = {
+      postalCode: entry.postalCode,
+      placeName: entry.placeName,
+      adminName1: entry.adminName1,
+      countryCode: entry.countryCode,
+      lng: entry.lng,
+      lat: entry.lat,
+      count: 1
     };
-
+    console.log (newEntry)
+    if (placeNames.length === 0) {
+      placeNames.push(newEntry);
+    }else{
+      for (let i = 0; i < (placeNames.length); i++) {
+        if ((placeNames[i].adminName1 === entry.adminName1) && (placeNames[i].placeName === entry.placeName)) {
+          newEntry.count = placeNames[i].count + 1;
+          placeNames.splice(i, 1);
+          placeNames.unshift(newEntry);
+          break;
+        }else{
+          //End of array?
+          if (placeNames.length === (i+1)) {
+            placeNames.push(newEntry);
+            break;
+          }
+        }
+      };
+    }
+    console.log(placeNames)
   });
+
+
+  // location.forEach((postalCodes) => {
+  //   if (formDestination === postalCodes.placeName) {
+  //     let newEntry = {
+  //       postalCode: postalCodes.postalCode,
+  //       placeName: postalCodes.placeName,
+  //       adminName1: postalCodes.adminName1,
+  //       countryCode: postalCodes.countryCode,
+  //       lng: postalCodes.lng,
+  //       lat: postalCodes.lat
+  //     };
+  //
+  //     if (placeNames.length === 0) {
+  //       placeNames.push(newEntry);
+  //     }else{
+  //       for (const place of placeNames) {
+  //         if (postalCodes.adminName1 === place.adminName1) {
+  //           break;
+  //         }else{
+  //           placeNames.push(newEntry);
+  //           console.log(placeNames);
+  //           break;
+  //         };
+  //       };
+  //     };
+  //   };
+  // });
   console.log(placeNames);
   if (placeNames.length === 0) {
     alert("Please enter a valid city.");
