@@ -1,6 +1,6 @@
 require("regenerator-runtime");
 const fetch = require("node-fetch");
-const port = 'http://localhost:3000';
+const port = `https://travel-app-bcaylor.herokuapp.com` || `http://localhost:3000`;
 
 const testServer = async () => {
   const response = await fetch(`${port}/test`);
